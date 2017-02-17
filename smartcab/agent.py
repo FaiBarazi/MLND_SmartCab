@@ -95,8 +95,8 @@ class LearningAgent(Agent):
         
         if self.Q.get(state)== None:
             self.Q[state] = {}
-        for action in self.valid_actions:
-            self.Q[state][action] = 0.0
+            for action in self.valid_actions:
+                self.Q[state][action] = 0.0
         
         return
 
@@ -139,10 +139,8 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        if self.epsilon >= 0.05:
-            self.Q[state][action] = (1 - self.alpha) * self.Q[state][action] + self.alpha * reward
-        print self.Q
-        return 
+        
+        self.Q[state][action] = (1 - self.alpha) * self.Q[state][action] + self.alpha * reward
 
     def update(self):
         """ The update function is called when a time step is completed in the 
@@ -191,7 +189,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env,update_delay = 0.01,log_metrics = True, display = False)
+    sim = Simulator(env,update_delay = 0.01,log_metrics = False, display = False)
     ##############
     # Run the simulator
     # Flags:
