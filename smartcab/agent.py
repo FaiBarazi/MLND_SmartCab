@@ -94,11 +94,11 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        
-        if self.Q.get(state)== None:
-            self.Q[state] = {}
-            for action in self.valid_actions:
-                self.Q[state][action] = 0.0
+        if self.learning :
+            if self.Q.get(state)== None:
+                self.Q[state] = {}
+                for action in self.valid_actions:
+                    self.Q[state][action] = 0.0
         
         return
 
@@ -141,8 +141,8 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        
-        self.Q[state][action] = (1 - self.alpha) * self.Q[state][action] + self.alpha * reward
+        if self.learning:
+            self.Q[state][action] = (1 - self.alpha) * self.Q[state][action] + self.alpha * reward
 
     def update(self):
         """ The update function is called when a time step is completed in the 
